@@ -1,0 +1,20 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: microservicecloud-zuul   #为这个服务取名，非常重要！！！！！
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: zuul.com
+    prefer-ip-address: true
+zuul:
+  routes:
+    dept0.serviceId: hf-itheima-cloud-provider  #dept0是可以自定义的只是作为区分，没什么具体意义
+    dept0.path: /dept10/**  #路径也是自定义的，支持通配符
+#  ignored-services: hf-itheima-cloud-provider    #需要隐藏的服务名，可以使用通配符，配置之后通过这个微服务名访问就失效了
+  prefix: /nihao     #设置统一公共前缀，设置后访问路径：http://zuul.com:9527/nihao/dept10/dept/3
